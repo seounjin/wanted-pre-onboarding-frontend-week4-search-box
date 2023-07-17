@@ -5,9 +5,12 @@ export const Wrapper = styled.div`
   height: 100%;
 
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   background-color: #cae9ff;
+
+  gap: 10px;
 `;
 
 export const Temp = styled.div``;
