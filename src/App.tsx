@@ -1,5 +1,7 @@
+import MainLayout from './layout/MainLayout/MainLayout';
+
 function App() {
-  return <div className="App">시작</div>;
+  return <MainLayout>메인</MainLayout>;
 }
 
 export default App;
