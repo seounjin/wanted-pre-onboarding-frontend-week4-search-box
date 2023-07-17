@@ -17,6 +17,7 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   plugins: ['react', 'prettier'],
   rules: {
+    "no-unused-vars": "off",
     "react/react-in-jsx-scope": "off",
     'prettier/prettier': 'error',
   },

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   MagnifyingGlassIcon,
   MagnifyingGlassIconWrapper,
@@ -7,14 +8,18 @@ import {
   Wrapper,
 } from './SearchBox.style';
 
-const SearchBox = () => {
+interface SearchBoxProps {
+  handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+}
+
+const SearchBox = ({ handleKeyDown }: SearchBoxProps) => {
   return (
     <Wrapper>
       <SearchInputContainer>
         <MagnifyingGlassIconWrapper>
           <MagnifyingGlassIcon />
         </MagnifyingGlassIconWrapper>
-        <SearchInput />
+        <SearchInput onKeyDown={handleKeyDown} />
       </SearchInputContainer>
       <SearchButton>검색</SearchButton>
     </Wrapper>

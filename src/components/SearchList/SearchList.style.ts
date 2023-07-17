@@ -1,5 +1,9 @@
 import { styled } from 'styled-components';
 
+interface ListItemProps {
+  $isCurrentIndex: boolean;
+}
+
 export const Wrapper = styled.div`
   background-color: #fff;
   width: 650px;
@@ -21,11 +25,12 @@ export const ListWrapper = styled.ul`
   margin: 0;
 `;
 
-export const ListItem = styled.li`
+export const ListItem = styled.li<ListItemProps>`
   display: flex;
   align-items: center;
-  margin-bottom: 12px;
+  padding: 10px;
   gap: 10px;
+  background-color: ${(props) => (props.$isCurrentIndex ? '#f5f5f5' : 'none')};
 `;
 
 export const Text = styled.span``;

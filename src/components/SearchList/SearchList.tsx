@@ -7,27 +7,32 @@ import {
   Text,
 } from './SearchList.style';
 
-const SearchList = () => {
+const dummyData = [
+  { text: '안녕' },
+  { text: '안녕' },
+  { text: '안녕' },
+  { text: '안녕' },
+  { text: '안녕' },
+];
+
+interface SearchListProps {
+  currentSearchIndex: number;
+}
+
+const SearchList = ({ currentSearchIndex }: SearchListProps) => {
   return (
     <Wrapper>
       <Title>추천 검색어</Title>
       <ListWrapper>
-        <ListItem>
-          <MagnifyingGlassIcon />
-          <Text>안녕</Text>
-        </ListItem>
-        <ListItem>
-          <MagnifyingGlassIcon />
-          <Text>안녕</Text>
-        </ListItem>
-        <ListItem>
-          <MagnifyingGlassIcon />
-          <Text>안녕</Text>
-        </ListItem>
-        <ListItem>
-          <MagnifyingGlassIcon />
-          <Text>안녕</Text>
-        </ListItem>
+        {dummyData.map((_, index) => (
+          <ListItem
+            key={`l${index}`}
+            $isCurrentIndex={currentSearchIndex === index}
+          >
+            <MagnifyingGlassIcon />
+            <Text>안녕</Text>
+          </ListItem>
+        ))}
       </ListWrapper>
     </Wrapper>
   );
