@@ -16,6 +16,7 @@ function App() {
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     switch (event.key) {
       case 'ArrowDown':
+        if (currentSearchIndex > searchList.length - 2) break;
         setCurrentSearchIndex((currentSearchIndex) => currentSearchIndex + 1);
         break;
       case 'ArrowUp':
@@ -40,6 +41,7 @@ function App() {
 
   useEffect(() => {
     if (debouncedSearchValue.length) {
+      setCurrentSearchIndex(0);
       fetchSearchList(debouncedSearchValue);
     }
   }, [debouncedSearchValue]);
