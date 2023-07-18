@@ -1,39 +1,46 @@
-import { MagnifyingGlassIcon } from '../SearchBox/SearchBox.style';
+import SearchListItem from '../SearchListItem/SearchListItem';
 import {
-  ListItem,
-  ListWrapper,
+  SearchListItemWrapper,
+  SearchListItemContainer,
   Title,
   Wrapper,
   Text,
 } from './SearchList.style';
-
-const dummyData = [
-  { text: '안녕' },
-  { text: '안녕' },
-  { text: '안녕' },
-  { text: '안녕' },
-  { text: '안녕' },
-];
+import { SearchListType } from './SearchList.type';
 
 interface SearchListProps {
+  searchList: SearchListType[];
   currentSearchIndex: number;
+  searchValue: string;
 }
 
-const SearchList = ({ currentSearchIndex }: SearchListProps) => {
+const SearchList = ({
+  searchList,
+  currentSearchIndex,
+  searchValue,
+}: SearchListProps) => {
   return (
     <Wrapper>
-      <Title>추천 검색어</Title>
-      <ListWrapper>
-        {dummyData.map((_, index) => (
-          <ListItem
-            key={`l${index}`}
-            $isCurrentIndex={currentSearchIndex === index}
-          >
-            <MagnifyingGlassIcon />
-            <Text>안녕</Text>
-          </ListItem>
-        ))}
-      </ListWrapper>
+      {searchValue.length ? (
+        <SearchListItem text={searchValue} />
+      ) : (
+        <Text>검색어가 없습니다</Text>
+      )}
+      {searchValue.length > 0 && searchList.length > 0 && (
+        <>
+          <Title>추천 검색어</Title>
+          <SearchListItemContainer>
+            {searchList.map(({ sickCd, sickNm }, index) => (
+              <SearchListItemWrapper key={sickCd}>
+                <SearchListItem
+                  text={sickNm}
+                  isActive={currentSearchIndex === index}
+                />
+              </SearchListItemWrapper>
+            ))}
+          </SearchListItemContainer>
+        </>
+      )}
     </Wrapper>
   );
 };

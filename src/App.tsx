@@ -1,10 +1,18 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getSearchList } from './api/searchApi';
 import SearchBox from './components/SearchBox/SearchBox';
 import SearchList from './components/SearchList/SearchList';
+import { SearchListType } from './components/SearchList/SearchList.type';
+import useDebounce from './hooks/useDebounce ';
 import MainLayout from './layout/MainLayout/MainLayout';
 
 function App() {
-  const [currentSearchIndex, setCurrentSearchIndex] = useState(0);
+  const [currentSearchIndex, setCurrentSearchIndex] = useState<number>(0);
+  const [searchList, setSearchList] = useState<SearchListType[]>([]);
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const { debouncedSearchValue } = useDebounce(searchValue);
+
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     switch (event.key) {
       case 'ArrowDown':
@@ -18,10 +26,36 @@ function App() {
         break;
     }
   };
+
+  const handleSearchBoxInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchValue(event.target.value);
+  };
+
+  const fetchSearchList = async (value: string) => {
+    console.log('value', value);
+    const data = await getSearchList(value);
+    console.log('res', data);
+    setSearchList(data);
+  };
+
+  useEffect(() => {
+    if (debouncedSearchValue.length) {
+      fetchSearchList(debouncedSearchValue);
+    }
+  }, [debouncedSearchValue]);
+
   return (
     <MainLayout>
-      <SearchBox handleKeyDown={handleKeyDown} />
-      <SearchList currentSearchIndex={currentSearchIndex} />
+      <SearchBox
+        handleKeyDown={handleKeyDown}
+        handleSearchBoxInput={handleSearchBoxInput}
+      >
+        <SearchList
+          searchList={searchList}
+          currentSearchIndex={currentSearchIndex}
+          searchValue={searchValue}
+        />
+      </SearchBox>
     </MainLayout>
   );
 }

@@ -1,5 +1,6 @@
 import React from 'react';
 import {
+  Container,
   MagnifyingGlassIcon,
   MagnifyingGlassIconWrapper,
   SearchButton,
@@ -9,19 +10,31 @@ import {
 } from './SearchBox.style';
 
 interface SearchBoxProps {
+  children: React.ReactNode;
   handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  handleSearchBoxInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const SearchBox = ({ handleKeyDown }: SearchBoxProps) => {
+const SearchBox = ({
+  children,
+  handleKeyDown,
+  handleSearchBoxInput,
+}: SearchBoxProps) => {
   return (
     <Wrapper>
-      <SearchInputContainer>
-        <MagnifyingGlassIconWrapper>
-          <MagnifyingGlassIcon />
-        </MagnifyingGlassIconWrapper>
-        <SearchInput onKeyDown={handleKeyDown} />
-      </SearchInputContainer>
-      <SearchButton>검색</SearchButton>
+      <Container>
+        <SearchInputContainer>
+          <MagnifyingGlassIconWrapper>
+            <MagnifyingGlassIcon />
+          </MagnifyingGlassIconWrapper>
+          <SearchInput
+            onKeyDown={handleKeyDown}
+            onChange={handleSearchBoxInput}
+          />
+        </SearchInputContainer>
+        <SearchButton>검색</SearchButton>
+      </Container>
+      {children}
     </Wrapper>
   );
 };

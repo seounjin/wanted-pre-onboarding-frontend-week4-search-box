@@ -2,6 +2,10 @@ import { styled } from 'styled-components';
 import { ReactComponent as MagnifyingGlassSvgIcon } from '../../Icons/MagnifyingGlass.svg';
 
 export const Wrapper = styled.div`
+  position: relative;
+`;
+
+export const Container = styled.div`
   width: 650px;
   height: 74px;
 
