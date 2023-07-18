@@ -35,7 +35,6 @@ function App() {
   const fetchSearchList = async (value: string) => {
     console.log('value', value);
     const data = await getSearchList(value);
-    console.log('res', data);
     setSearchList(data);
   };
 
