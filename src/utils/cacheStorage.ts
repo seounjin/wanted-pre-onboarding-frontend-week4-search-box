@@ -17,11 +17,15 @@ export const setCacheStorage = async (
   expireTime: number
 ) => {
   try {
+    const currentTimeInSeconds = getCurrentTimeInSeconds();
+
     const cacheStorage = await caches.open(name);
 
     await cacheStorage.put(
       url,
-      new Response(JSON.stringify({ data, expireTime }))
+      new Response(
+        JSON.stringify({ data, expireTime: currentTimeInSeconds + expireTime })
+      )
     );
   } catch (error) {
     console.log('setCacheStorage 에러', error);

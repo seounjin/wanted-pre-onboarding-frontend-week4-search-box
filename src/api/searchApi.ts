@@ -20,8 +20,7 @@ export const getSearchList = async (value: string) => {
     console.info('calling api');
     const res = await axiosClient.get(url);
 
-    const expireTime = currentTimeInSeconds + EXPIRE_TIME;
-    await setCacheStorage(SEARCH_LIST, url, res.data, expireTime);
+    await setCacheStorage(SEARCH_LIST, url, res.data, EXPIRE_TIME);
 
     return res.data;
   } catch (error) {
