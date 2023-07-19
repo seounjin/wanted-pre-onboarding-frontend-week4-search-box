@@ -5,29 +5,18 @@ import SearchList from './components/SearchList/SearchList';
 import { SearchListType } from './components/SearchList/SearchList.type';
 import { MAX_SEARCH_LIST_LENGTH } from './constants/const';
 import useDebounce from './hooks/useDebounce ';
+import useKeyboardNavigation from './hooks/useKeyboardNavigation';
 import MainLayout from './layout/MainLayout/MainLayout';
 
 function App() {
-  const [currentSearchIndex, setCurrentSearchIndex] = useState<number>(0);
   const [searchList, setSearchList] = useState<SearchListType[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
 
   const { debouncedSearchValue } = useDebounce(searchValue, 150);
-
-  const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    switch (event.key) {
-      case 'ArrowDown':
-        if (currentSearchIndex > searchList.length - 2) break;
-        setCurrentSearchIndex((currentSearchIndex) => currentSearchIndex + 1);
-        break;
-      case 'ArrowUp':
-        if (currentSearchIndex === 0) break;
-        setCurrentSearchIndex((currentSearchIndex) => currentSearchIndex - 1);
-        break;
-      default:
-        break;
-    }
-  };
+  const { currentSearchIndex, setCurrentSearchIndex, handleKeyDown } =
+    useKeyboardNavigation({
+      maxIndex: setSearchList.length,
+    });
 
   const handleSearchBoxInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
