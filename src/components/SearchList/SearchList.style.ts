@@ -7,15 +7,7 @@ export const Wrapper = styled.div`
   padding: 30px;
   border-radius: 22px;
   font-size: 18px;
-
   margin-top: 20px;
-
-  overflow-y: auto;
-  max-height: 400px;
-
-  &::-webkit-scrollbar {
-    display: none;
-  }
 `;
 
 export const Title = styled.h5`

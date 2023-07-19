@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react';
 
-const useDebounce = (searchValue: string) => {
+const useDebounce = (searchValue: string, delay: number) => {
   const [debouncedSearchValue, setDebouncedSearchValue] =
     useState<string>(searchValue);
 
   useEffect(() => {
     const debounceFunc = setTimeout(() => {
       setDebouncedSearchValue(searchValue);
-    }, 150);
+    }, delay);
 
     return () => clearTimeout(debounceFunc);
   }, [searchValue]);

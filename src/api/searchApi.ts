@@ -14,14 +14,11 @@ export const getSearchList = async (value: string) => {
     const cacheRes = await getCacheStorage(SEARCH_LIST, url);
 
     if (cacheRes && currentTimeInSeconds <= cacheRes.expireTime) {
-      console.log('캐시 있음');
       return cacheRes.data;
     }
 
-    console.log('캐시 없음');
-
-    const res = await axiosClient.get(url);
     console.info('calling api');
+    const res = await axiosClient.get(url);
 
     const expireTime = currentTimeInSeconds + EXPIRE_TIME;
     await setCacheStorage(SEARCH_LIST, url, res.data, expireTime);

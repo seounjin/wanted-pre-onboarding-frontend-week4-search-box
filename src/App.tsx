@@ -3,6 +3,7 @@ import { getSearchList } from './api/searchApi';
 import SearchBox from './components/SearchBox/SearchBox';
 import SearchList from './components/SearchList/SearchList';
 import { SearchListType } from './components/SearchList/SearchList.type';
+import { MAX_SEARCH_LIST_LENGTH } from './constants/const';
 import useDebounce from './hooks/useDebounce ';
 import MainLayout from './layout/MainLayout/MainLayout';
 
@@ -11,7 +12,7 @@ function App() {
   const [searchList, setSearchList] = useState<SearchListType[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
 
-  const { debouncedSearchValue } = useDebounce(searchValue);
+  const { debouncedSearchValue } = useDebounce(searchValue, 150);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
     switch (event.key) {
@@ -33,9 +34,12 @@ function App() {
   };
 
   const fetchSearchList = async (value: string) => {
-    console.log('value', value);
     const data = await getSearchList(value);
-    setSearchList(data);
+    const sliceData =
+      data.length >= MAX_SEARCH_LIST_LENGTH
+        ? data.slice(0, MAX_SEARCH_LIST_LENGTH)
+        : data;
+    setSearchList(sliceData);
   };
 
   useEffect(() => {
@@ -54,7 +58,7 @@ function App() {
         <SearchList
           searchList={searchList}
           currentSearchIndex={currentSearchIndex}
-          searchValue={searchValue}
+          searchValue={debouncedSearchValue}
         />
       </SearchBox>
     </MainLayout>
