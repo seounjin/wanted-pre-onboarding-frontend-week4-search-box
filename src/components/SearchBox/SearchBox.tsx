@@ -12,13 +12,17 @@ import {
 interface SearchBoxProps {
   children: React.ReactNode;
   handleKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => void;
-  handleSearchBoxInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearchInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleSearchInputBlur: () => void;
+  handleSearchInputfocus: () => void;
 }
 
 const SearchBox = ({
   children,
   handleKeyDown,
-  handleSearchBoxInput,
+  handleSearchInputChange,
+  handleSearchInputBlur,
+  handleSearchInputfocus,
 }: SearchBoxProps) => {
   return (
     <Wrapper>
@@ -29,7 +33,9 @@ const SearchBox = ({
           </MagnifyingGlassIconWrapper>
           <SearchInput
             onKeyDown={handleKeyDown}
-            onChange={handleSearchBoxInput}
+            onChange={handleSearchInputChange}
+            onFocus={handleSearchInputfocus}
+            onBlur={handleSearchInputBlur}
           />
         </SearchInputContainer>
         <SearchButton>검색</SearchButton>

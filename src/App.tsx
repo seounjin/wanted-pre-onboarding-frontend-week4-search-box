@@ -6,21 +6,23 @@ import { SearchListType } from './components/SearchList/SearchList.type';
 import { MAX_SEARCH_LIST_LENGTH } from './constants/const';
 import useDebounce from './hooks/useDebounce ';
 import useKeyboardNavigation from './hooks/useKeyboardNavigation';
+import useSearchInput from './hooks/useSearchInput';
 import MainLayout from './layout/MainLayout/MainLayout';
 
 function App() {
   const [searchList, setSearchList] = useState<SearchListType[]>([]);
-  const [searchValue, setSearchValue] = useState<string>('');
-
+  const {
+    searchValue,
+    isSearchListVisible,
+    handleSearchInputChange,
+    handleSearchInputBlur,
+    handleSearchInputfocus,
+  } = useSearchInput();
   const { debouncedSearchValue } = useDebounce(searchValue, 150);
   const { currentSearchIndex, setCurrentSearchIndex, handleKeyDown } =
     useKeyboardNavigation({
       maxIndex: setSearchList.length,
     });
-
-  const handleSearchBoxInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
-  };
 
   const fetchSearchList = async (value: string) => {
     const data = await getSearchList(value);
@@ -42,13 +44,17 @@ function App() {
     <MainLayout>
       <SearchBox
         handleKeyDown={handleKeyDown}
-        handleSearchBoxInput={handleSearchBoxInput}
+        handleSearchInputChange={handleSearchInputChange}
+        handleSearchInputBlur={handleSearchInputBlur}
+        handleSearchInputfocus={handleSearchInputfocus}
       >
-        <SearchList
-          searchList={searchList}
-          currentSearchIndex={currentSearchIndex}
-          searchValue={debouncedSearchValue}
-        />
+        {isSearchListVisible && (
+          <SearchList
+            searchList={searchList}
+            currentSearchIndex={currentSearchIndex}
+            searchValue={debouncedSearchValue}
+          />
+        )}
       </SearchBox>
     </MainLayout>
   );
