@@ -18,6 +18,15 @@ $ npm run start
 
 <br />
 
+## 실행 화면
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/254534374-a6ddf9fb-daa7-4cc1-a293-4a61e44adcc9.gif" /></td>
+  </tr>
+</table>
+
+<br />
+
 ## 기능 구현
 
 
@@ -52,8 +61,22 @@ const useKeyboardNavigation = ({ maxIndex }: { maxIndex: number }) => {
 
 export default useKeyboardNavigation;
 ```
+<br />
+
+<div align="center">
+
+### 키보드로 추천 검색어 이동 화면
+
+</div>
+  
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/254534385-031547c5-0957-423a-83ae-52c47c4bf985.gif" /></td>
+  </tr>
+</table>
 
 <br />
+
 
 ### 입력마다 API 호출하지 않도록 API 호출 횟수를 줄이는 전략 수립 및 실행
 
@@ -174,3 +197,16 @@ export const getCurrentTimeInSeconds = () => Math.floor(Date.now() / 1000);
 - Local Storage는 동기적으로 작업이 완료되지 않았다면 멈추게 됩니다. 반복적인 데이터 요청이 발생하는 경우 성능 저하가 발생할 수 있습니다.
 - 반면 Cache Storage는 비동기적으로 작업을 수행하기 때문에 자동완성검색기능과 같은 여러번의 API 함수 요청이 발생하는 상황에서 성능에 최적화라고 판단하였습니다.
 
+<br />
+
+<div align="center">
+  
+### API 호출 Console.log 화면
+
+</div>
+
+<table align="center">
+  <tr>
+    <td align="center" width="720px"><img src="https://user-images.githubusercontent.com/39517396/254534391-4042831e-5bc2-4c24-a4bd-f42abd3964d7.gif" /></td>
+  </tr>
+</table>
