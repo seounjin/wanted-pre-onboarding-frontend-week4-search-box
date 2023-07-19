@@ -42,8 +42,7 @@ export const SearchButton = styled.button`
 `;
 
 export const MagnifyingGlassIconWrapper = styled.div`
-  padding-left: 24px;
-  padding-right: 10px;
+  padding: 3px 10px 0 24px;
 `;
 
 export const MagnifyingGlassIcon = styled(MagnifyingGlassSvgIcon)`

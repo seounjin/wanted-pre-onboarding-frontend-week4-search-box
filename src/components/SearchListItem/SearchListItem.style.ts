@@ -17,4 +17,6 @@ export const Text = styled.span`
   word-break: break-word;
 `;
 
-export const MagnifyingGlassIconWrapper = styled.div``;
+export const MagnifyingGlassIconWrapper = styled.div`
+  padding-top: 4px;
+`;

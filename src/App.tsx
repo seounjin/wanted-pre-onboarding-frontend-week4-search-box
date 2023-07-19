@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getSearchList } from './api/searchApi';
 import SearchBox from './components/SearchBox/SearchBox';
 import SearchList from './components/SearchList/SearchList';
@@ -21,7 +21,7 @@ function App() {
   const { debouncedSearchValue } = useDebounce(searchValue, 150);
   const { currentSearchIndex, setCurrentSearchIndex, handleKeyDown } =
     useKeyboardNavigation({
-      maxIndex: setSearchList.length,
+      maxIndex: searchList.length,
     });
 
   const fetchSearchList = async (value: string) => {

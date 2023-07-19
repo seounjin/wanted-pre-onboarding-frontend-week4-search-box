@@ -7,8 +7,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 300px;
+  padding-top: 180px;
   background-color: #cae9ff;
 `;
 
-export const Temp = styled.div``;
+export const Title = styled.h1`
+  text-align: center;
+  margin-bottom: 40px;
+`;

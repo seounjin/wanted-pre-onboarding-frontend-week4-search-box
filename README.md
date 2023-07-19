@@ -201,7 +201,7 @@ export const getCurrentTimeInSeconds = () => Math.floor(Date.now() / 1000);
 
 <div align="center">
   
-### API 호출 Console.log 화면
+### API 호출 Console.info 화면
 
 </div>
 
